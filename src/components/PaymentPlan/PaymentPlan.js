@@ -52,6 +52,7 @@ const PaymentPlan = ({ TotalCartValue }) => {
 
     // window.localStorage.setItem("downPayment", downpay);
     window.localStorage.setItem("shoppingCredits", shoppingCredits);
+    window.localStorage.setItem("downPayment", customiseDownPay);
     window.localStorage.setItem("interestRate", interestRate);
     window.localStorage.setItem("repayPlanMonthly", repayPlanMonthly);
 
