@@ -87,7 +87,16 @@ const PreApprovedSteps = () => {
     <div className="container d-flex justify-content-center mt-2">
       <div className="">
         <div className={styles.action_box}>
-          {nextStep === 2 && <p style={{ color: "tomato" }}>&#8592; Back</p>}
+          {nextStep === 2 && (
+            <p
+              onClick={() => {
+                setnextStep(nextStep - 1);
+              }}
+              style={{ color: "tomato", cursor: "pointer" }}
+            >
+              &#8592; Back
+            </p>
+          )}
           <Progress next={next} widthLevel={successful} />
         </div>
         {nextStep === 1 && (
@@ -95,7 +104,7 @@ const PreApprovedSteps = () => {
             <h5 className="text-center p-3">What Do You Do?</h5>
             <div className={styles.stepsIcon}>
               <div
-                className="slide_top"
+                className="slide_top "
                 style={{ width: "100px" }}
                 value="Paid Employment"
                 name="employmentType"
@@ -106,7 +115,7 @@ const PreApprovedSteps = () => {
                   alt="icons"
                   width="100px"
                 />
-                <p className="">
+                <p style={{ cursor: "pointer" }}>
                   <strong>Paid Employment</strong>
                 </p>
               </div>
@@ -115,24 +124,24 @@ const PreApprovedSteps = () => {
                 value="padi sddsd"
                 name="employmentType"
                 onClick={onChangeHandler}
-                className="slide_top"
+                className="slide_top "
               >
                 <img
                   src="./images/selfEmployed.png"
                   alt="icons"
                   width="100px"
                 />
-                <p className="">Self Employed/ Freelance</p>
+                <p style={{ cursor: "pointer" }}>Self Employed/ Freelance</p>
               </div>
               <div
                 style={{ width: "100px" }}
                 name="employmentType"
                 value="corp"
                 onClick={onChangeHandler}
-                className="slide_top"
+                className="slide_top "
               >
                 <img src="./images/corprate.png" alt="icons" width="100px" />
-                <p className="">Corporate Organisation</p>
+                <p style={{ cursor: "pointer" }}>Corporate Organisation</p>
               </div>
             </div>
             <form onSubmit={nextActionPage}>
@@ -162,7 +171,9 @@ const PreApprovedSteps = () => {
                     <FormInput
                       type="text"
                       name="nextSalaryDate"
-                      min="2021-05-29"
+                      // min="2021-05-29"
+                      minDate={new Date(2021, 1, 1)}
+                      maxDate={new Date(2022, 1, 29)}
                       onFocus={(e) => (e.currentTarget.type = "date")}
                       onBlur={(e) => (e.currentTarget.type = "text")}
                       placeholder="Select Pay Date"

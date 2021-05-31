@@ -71,9 +71,7 @@ const PaymentPlan = ({ TotalCartValue }) => {
   const onChangeHandler = (e) => {
     if (Number(e.target.value) > downPayment) {
       setcustomiseDownPay(e.target.value);
-      setDownPayment(e.target.value);
-    } else {
-      console.log("val", e.target.value);
+      // setDownPayment(customiseDownPay);
     }
   };
   const setPlanTenure = () => {
