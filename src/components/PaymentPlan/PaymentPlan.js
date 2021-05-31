@@ -49,23 +49,21 @@ const PaymentPlan = ({ TotalCartValue }) => {
     let shoppingCredits = Number(TotalCartValue) - Number(customiseDownPay);
     let interestRate = 0.04 * shoppingCredits * payTenure;
     let repayPlanMonthly = (shoppingCredits + interestRate) / payTenure;
-    setShoppingCredit(shoppingCredits);
-    setmonthlyRepay(repayPlanMonthly);
+
+    // window.localStorage.setItem("downPayment", downpay);
+    window.localStorage.setItem("shoppingCredits", shoppingCredits);
+    window.localStorage.setItem("interestRate", interestRate);
+    window.localStorage.setItem("repayPlanMonthly", repayPlanMonthly);
+
+    setShoppingCredit(localStorage.getItem("shoppingCredits"));
+    setmonthlyRepay(localStorage.getItem("repayPlanMonthly"));
     setcustomiseDownPay();
   };
 
   useEffect(() => {
-    const calculator = () => {
-      let downpay = 0.3 * Number(TotalCartValue);
-      setDownPayment(downpay);
-
-      let shoppingCredits = Number(TotalCartValue) - downpay;
-      let interestRate = 0.04 * shoppingCredit * payTenure;
-      let repayPlanMonthly = (shoppingCredit + interestRate) / payTenure;
-      setShoppingCredit(shoppingCredits);
-      setmonthlyRepay(repayPlanMonthly);
-    };
-    calculator();
+    setShoppingCredit(localStorage.getItem("shoppingCredits"));
+    setmonthlyRepay(localStorage.getItem("repayPlanMonthly"));
+    setDownPayment(localStorage.getItem("downPayment"));
   }, [TotalCartValue, payTenure, shoppingCredit]);
 
   const onChangeHandler = (e) => {

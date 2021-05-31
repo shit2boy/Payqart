@@ -31,7 +31,7 @@ function App() {
           <ProductCard />
         </Col>
         <Col className="container kyc-steps p-4" xs={0} md={6}>
-          <PreApprovedSteps />
+          <PreApprovedSteps TotalCartValue="80500" />
         </Col>
       </Row>
     </div>
