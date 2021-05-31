@@ -1,0 +1,20 @@
+.card_container {
+  background: white;
+  padding: 30px 10px;
+  width: 300px;
+  border-radius: 25px;
+}
+.cardContent {
+  padding: 10px;
+}
+
+.cardCart {
+  background-color: white;
+  margin: 30px 0px;
+  padding: 20px 5px 10px;
+  width: 300px;
+  border-radius: 20px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}

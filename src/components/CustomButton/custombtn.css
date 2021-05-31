@@ -1,0 +1,33 @@
+.custom-button {
+  min-width: 165px;
+  width: auto;
+  height: 45px;
+  letter-spacing: 0.5px;
+  /* line-height: 50px; */
+  padding: 0 25px;
+  font-size: 15px;
+  background-color: var(--primary-button);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--mainWhite);
+  /* text-transform: uppercase; */
+  cursor: pointer;
+  outline: none;
+  font-weight: bolder;
+  border: 1px solid var(--primary-button);
+}
+.custom-radius {
+  border-radius: 2.25rem;
+}
+.custom-button:hover {
+  background-color: var(--mainWhite);
+  color: var(--primary-button);
+  border: 1px solid var(--primary-button);
+}
+.custom-button_inherit {
+  background-color: inherit;
+  color: var(--hero-subtitle-color);
+  border: 1px solid var(--hero-subtitle-color);
+  border-radius: 2.25rem;
+}
