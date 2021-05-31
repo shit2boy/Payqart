@@ -13,13 +13,13 @@
 .forminput {
   background: inherit;
   color: grey;
-  font-size: 16px;
-  padding: 10px 12px 9px 40px;
+  font-size: 14px;
+  padding: 8px 10px 8px 40px;
   display: block;
   width: 100%;
   border: none;
   background: #ffffff !important;
-  box-shadow: 10px 8px 19px rgba(0, 0, 0, 0.2);
+  box-shadow: 8px 6px 14px rgba(0, 0, 0, 0.2);
   margin: 25px 0;
   margin-top: 10px;
 }
@@ -29,7 +29,7 @@
 
 .forminput:focus {
   outline: none;
-  /* color: black; */
+  color: black;
 }
 
 input::placeholder,

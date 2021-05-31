@@ -7,7 +7,7 @@ function App() {
   return (
     <div className="container-fluid">
       <Row>
-        <Col className="payqart-label" xs={3} md={3}>
+        <Col className="payqart-label p-4" xs={0} md={3}>
           <div>
             <p>&#8592; Back To Store</p>
           </div>
@@ -26,11 +26,11 @@ function App() {
             </ul>
           </div>
         </Col>
-        <Col className="cart-display p-4" xs={3} md={3}>
+        <Col className="cart-display p-4" xs={0} md={3}>
           <h6 className="mb-3">Order Summary</h6>
           <ProductCard />
         </Col>
-        <Col className="container kyc-steps p-4" xs={7} md={6}>
+        <Col className="container kyc-steps p-4" xs={0} md={6}>
           <PreApprovedSteps />
         </Col>
       </Row>

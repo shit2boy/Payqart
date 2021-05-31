@@ -6,15 +6,16 @@
   /* line-height: 50px; */
   padding: 0 25px;
   font-size: 15px;
-  background-color: var(--primary-button);
+  background-color: var(--mainWhite);
   display: flex;
   justify-content: center;
   align-items: center;
-  color: var(--mainWhite);
+  color: var(--primary-button);
   /* text-transform: uppercase; */
   cursor: pointer;
   outline: none;
   font-weight: bolder;
+  border-radius: 25px;
   border: 1px solid var(--primary-button);
 }
 .custom-radius {

@@ -1,4 +1,37 @@
+.containers {
+  padding: 0px 10px;
+}
+.action_box {
+  display: flex;
+  justify-content: space-between;
+}
+
 .stepsIcon {
   display: flex;
   justify-content: space-between;
+  align-items: center;
+}
+
+.stepsIcon div p {
+  font-size: 10px;
+}
+
+.radio {
+  display: flex;
+  justify-content: space-evenly;
+  align-content: center;
+  box-shadow: var(--lightShadow);
+  background-color: #ffffff;
+}
+
+.nextAction_btn {
+  display: grid;
+  place-items: center;
+  padding: 35px 0px 0px 0px;
+}
+@media (min-width: 480px) {
+  .containers {
+    width: 400px;
+    padding: 0px 10px;
+  }
 }

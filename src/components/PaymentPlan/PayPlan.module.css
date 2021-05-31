@@ -1,0 +1,79 @@
+.planCard {
+  border-radius: 5px;
+  width: 80px;
+  text-align: center;
+
+  box-shadow: var(--lightShadow);
+  margin: 4px 6px;
+  text-transform: capitalize;
+  cursor: pointer;
+  user-select: none;
+}
+.active {
+  background: linear-gradient(
+    90deg,
+    rgba(126, 2, 74, 1) 10%,
+    rgba(243, 1, 78, 1) 100%
+  );
+  color: #fff;
+}
+.planCard:hover,
+:focus {
+  background: linear-gradient(
+    90deg,
+    rgba(126, 2, 74, 1) 10%,
+    rgba(243, 1, 78, 1) 100%
+  );
+  color: var(--mainWhite);
+}
+.planCard p {
+  margin-bottom: 0px !important;
+}
+
+.planDuration {
+  font-size: 35px;
+  font-weight: bold;
+}
+
+.table td,
+.table th:first-child {
+  border-top: 0px;
+  border-right: 1px solid #dee2e6;
+  color: #7e024a;
+}
+
+.payment_summary {
+  border-radius: 10px;
+  box-shadow: var(--lightShadow);
+}
+
+.customise_card {
+  background: linear-gradient(
+    90deg,
+    rgb(126, 2, 74) 10%,
+    rgba(243, 1, 78, 1) 100%
+  );
+  border-radius: 5px;
+  color: #fff;
+  padding: 15px 30px;
+}
+.customise_card p {
+  text-align: center;
+}
+.updateInput i {
+  position: absolute;
+  border: 1px #ddd solid;
+  padding: 6px 12px;
+  background: var(--mainWhite);
+  color: var(--primary-button);
+  font-size: 16px;
+}
+.updateInput > input {
+  flex: 1;
+  height: 30px;
+}
+
+.update_btn {
+  display: grid;
+  place-items: center;
+}
