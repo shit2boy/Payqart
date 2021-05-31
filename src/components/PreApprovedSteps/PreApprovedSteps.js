@@ -20,19 +20,9 @@ const PreApprovedSteps = ({ TotalCartValue }) => {
 
   const [downPayment, setDownPayment] = useState("");
   const [payTenure, setPayTenure] = useState(1);
-  const [customiseDownPay, setcustomiseDownPay] = useState(0);
+  // const [customiseDownPay, setcustomiseDownPay] = useState(0);
   const [shoppingCredit, setShoppingCredit] = useState("");
   const [monthlyRepay, setmonthlyRepay] = useState("");
-
-  const customisedPlanCalculator = async (event) => {
-    event.preventDefault();
-    let shoppingCredits = Number(TotalCartValue) - Number(customiseDownPay);
-    let interestRate = 0.04 * shoppingCredits * payTenure;
-    let repayPlanMonthly = (shoppingCredits + interestRate) / payTenure;
-    setShoppingCredit(shoppingCredits);
-    setmonthlyRepay(repayPlanMonthly);
-    setcustomiseDownPay();
-  };
 
   useEffect(() => {
     const calculator = () => {
@@ -244,11 +234,11 @@ const PreApprovedSteps = ({ TotalCartValue }) => {
           <PaymentPlan
             downPayment={downPayment}
             setPayTenure={setPayTenure}
+            //  customisedPlanCalculato={customisedPlanCalculator}
             monthlyRepay={monthlyRepay}
             TotalCartValue="80500"
           />
         )}
-        {/* customisedPlanCalculator={customisedPlanCalculator} */}
         <div className={styles.nextAction_btn}>
           <CustomButton onClick={nextActionPage}>Continue</CustomButton>
         </div>
