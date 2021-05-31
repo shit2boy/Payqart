@@ -248,7 +248,7 @@ const PreApprovedSteps = ({ TotalCartValue }) => {
             TotalCartValue="80500"
           />
         )}
-        customisedPlanCalculator={customisedPlanCalculator}
+        {/* customisedPlanCalculator={customisedPlanCalculator} */}
         <div className={styles.nextAction_btn}>
           <CustomButton onClick={nextActionPage}>Continue</CustomButton>
         </div>
