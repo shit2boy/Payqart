@@ -51,9 +51,9 @@ const PaymentPlan = ({
 
   const customisedPlanCalculator = (id) => {
     // event.preventDefault();
-    if (customiseDownPay < downPayments) {
-      return;
-    }
+    // if (customiseDownPay < downPayments) {
+    //   return;
+    // }
     let interestRate;
     let initialPay;
     let shoppingCredit;
@@ -89,7 +89,7 @@ const PaymentPlan = ({
     customisedPlanCalculator(plan_Id.duration);
 
     setPayTenure(() => plan_Id.duration);
-    console.log(plan_Id.duration);
+    // console.log(plan_Id.duration);
   };
 
   return (
