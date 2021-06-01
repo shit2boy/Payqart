@@ -9,7 +9,7 @@ import styles from "./PreApprovedStep.module.css";
 const PaymentPlan = lazy(() => import("../PaymentPlan/PaymentPlan"));
 
 const PreApprovedSteps = ({ TotalCartValue }) => {
-  const [nextStep, setnextStep] = useState(2);
+  const [nextStep, setnextStep] = useState(1);
   const [step, setStep] = useState(1);
   const [errors, setErrors] = useState({});
   const [data, setData] = useState({
