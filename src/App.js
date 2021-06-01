@@ -1,7 +1,12 @@
 import "./App.css";
 import { Row, Col } from "react-bootstrap";
 import ProductCard from "./components/ProductCard/ProductCard";
-import PreApprovedSteps from "./components/PreApprovedSteps/PreApprovedSteps";
+// import PreApprovedSteps from "./components/PreApprovedSteps/PreApprovedSteps";
+import { lazy, Suspense } from "react";
+
+const PreApprovedSteps = lazy(() =>
+  import("./components/PreApprovedSteps/PreApprovedSteps")
+);
 
 function App() {
   return (
@@ -31,7 +36,9 @@ function App() {
           <ProductCard />
         </Col>
         <Col className="container kyc-steps p-4" xs={0} md={6}>
-          <PreApprovedSteps TotalCartValue="80500" />
+          <Suspense fallback={<p>Loading...</p>}>
+            <PreApprovedSteps TotalCartValue="80500" />
+          </Suspense>
         </Col>
       </Row>
     </div>

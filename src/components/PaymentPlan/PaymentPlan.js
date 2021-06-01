@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import FormInput from "../Form-input/form-input.component";
 import styles from "./PayPlan.module.css";
 import UpdateButton from "../CustomButton/CustomButton";
@@ -37,44 +37,59 @@ const payPlan_Data = [
   },
 ];
 
-const PaymentPlan = ({ TotalCartValue }) => {
-  const [downPayment, setDownPayment] = useState("");
+const PaymentPlan = ({
+  TotalCartValue,
+  shoppingCredits,
+  repayPlanMonthlys,
+  downPayments,
+}) => {
+  const [downPayment, setDownPayment] = useState(downPayments);
   const [payTenure, setPayTenure] = useState(1);
   const [customiseDownPay, setcustomiseDownPay] = useState(0);
-  const [shoppingCredit, setShoppingCredit] = useState("");
-  const [monthlyRepay, setmonthlyRepay] = useState("");
+  const [shoppingCredit, setShoppingCredit] = useState(shoppingCredits);
+  const [monthlyRepay, setmonthlyRepay] = useState(repayPlanMonthlys);
 
-  const customisedPlanCalculator = async (event) => {
-    event.preventDefault();
-    let shoppingCredits = Number(TotalCartValue) - Number(customiseDownPay);
-    let interestRate = 0.04 * shoppingCredits * payTenure;
-    let repayPlanMonthly = (shoppingCredits + interestRate) / payTenure;
+  const customisedPlanCalculator = (id) => {
+    // event.preventDefault();
+    if (customiseDownPay < downPayments) {
+      return;
+    }
+    let interestRate;
+    let initialPay;
+    let shoppingCredit;
 
-    // window.localStorage.setItem("downPayment", downpay);
-    window.localStorage.setItem("shoppingCredits", shoppingCredits);
-    window.localStorage.setItem("downPayment", customiseDownPay);
-    window.localStorage.setItem("interestRate", interestRate);
-    window.localStorage.setItem("repayPlanMonthly", repayPlanMonthly);
+    let repayPlanMonthly;
+    initialPay =
+      customiseDownPay > downPayments ? customiseDownPay : downPayments;
+    // console.log("asd", initialPay);
+    shoppingCredit = Number(TotalCartValue) - Number(initialPay);
 
-    setShoppingCredit(localStorage.getItem("shoppingCredits"));
-    setmonthlyRepay(localStorage.getItem("repayPlanMonthly"));
+    interestRate = 0.04 * shoppingCredit * id;
+    repayPlanMonthly = (shoppingCredit + interestRate) / id;
+
+    setShoppingCredit(shoppingCredit);
+    setmonthlyRepay(repayPlanMonthly);
+    setDownPayment(initialPay);
     setcustomiseDownPay();
   };
 
-  useEffect(() => {
-    setShoppingCredit(localStorage.getItem("shoppingCredits"));
-    setmonthlyRepay(localStorage.getItem("repayPlanMonthly"));
-    setDownPayment(localStorage.getItem("downPayment"));
-  }, [TotalCartValue, payTenure, shoppingCredit]);
-
   const onChangeHandler = (e) => {
-    if (Number(e.target.value) > downPayment) {
+    if (Number(e.target.value) < downPayments) {
+      alert(`Please input value above #${downPayments}`);
+    } else {
       setcustomiseDownPay(e.target.value);
-      // setDownPayment(customiseDownPay);
+      setDownPayment(Number(e.target.value));
     }
   };
-  const setPlanTenure = () => {
-    setPayTenure();
+
+  const handleTenurePlan = async (duration) => {
+    let plan_Id;
+    plan_Id = payPlan_Data.find((item) => item.duration === duration);
+
+    customisedPlanCalculator(plan_Id.duration);
+
+    setPayTenure(() => plan_Id.duration);
+    console.log(plan_Id.duration);
   };
 
   return (
@@ -85,6 +100,7 @@ const PaymentPlan = ({ TotalCartValue }) => {
           {payPlan_Data.map((plan) => (
             <div
               key={plan.duration}
+              onClick={() => handleTenurePlan(plan.duration)}
               className={`col slide_top ${styles.planCard} ${
                 plan.select ? `${styles.active}` : null
               }`}
@@ -129,11 +145,11 @@ const PaymentPlan = ({ TotalCartValue }) => {
             </tbody>
           </table>
           <div className={`${styles.customise_card} col-sm-6`}>
-            <span onChange={setPlanTenure} className="d-block text-center">
+            <span className="d-block text-center">
               Customise <br />
               Down Payment
             </span>
-            <form onSubmit={customisedPlanCalculator}>
+            <form>
               <div className={styles.updateInput}>
                 <i className="far fa-envelope icon">&#8358; </i>
                 <FormInput
@@ -146,7 +162,8 @@ const PaymentPlan = ({ TotalCartValue }) => {
               </div>
               <div className={styles.update_btn}>
                 <UpdateButton
-                  // type="button"
+                  type="button"
+                  onClick={() => customisedPlanCalculator(payTenure)}
                   style={{
                     background: "inherit",
                     color: "white",

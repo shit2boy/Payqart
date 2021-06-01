@@ -1,13 +1,15 @@
-import React, { useState, useEffect } from "react";
+import React, { lazy, useState, Suspense, useEffect } from "react";
 import FormInput from "../Form-input/form-input.component";
 import Progress from "../OnboardingSteps/Progress";
 import CustomButton from "../CustomButton/CustomButton";
 import RadioInput from "../RadioInput/RadioInput";
 import styles from "./PreApprovedStep.module.css";
-import PaymentPlan from "../PaymentPlan/PaymentPlan";
+// import PaymentPlan from "../PaymentPlan/PaymentPlan";
+
+const PaymentPlan = lazy(() => import("../PaymentPlan/PaymentPlan"));
 
 const PreApprovedSteps = ({ TotalCartValue }) => {
-  const [nextStep, setnextStep] = useState(1);
+  const [nextStep, setnextStep] = useState(2);
   const [step, setStep] = useState(1);
   const [errors, setErrors] = useState({});
   const [data, setData] = useState({
@@ -26,21 +28,18 @@ const PreApprovedSteps = ({ TotalCartValue }) => {
 
   useEffect(() => {
     const calculator = () => {
+      let shoppingCredits;
+      let interestRate;
+      let repayPlanMonthly;
       let downpay = 0.3 * Number(TotalCartValue);
       setDownPayment(downpay);
 
-      let shoppingCredits = Number(TotalCartValue) - downpay;
-      let interestRate = 0.04 * Number(shoppingCredit) * payTenure;
-      let repayPlanMonthly =
-        (Number(shoppingCredit) + interestRate) / payTenure;
+      shoppingCredits = Number(TotalCartValue) - downpay;
+      interestRate = 0.04 * Number(shoppingCredits) * payTenure;
+      repayPlanMonthly = (Number(shoppingCredits) + interestRate) / payTenure;
 
-      window.localStorage.setItem("downPayment", downpay);
-      window.localStorage.setItem("shoppingCredits", shoppingCredits);
-      window.localStorage.setItem("interestRate", interestRate);
-      window.localStorage.setItem("repayPlanMonthly", repayPlanMonthly);
-
-      setShoppingCredit(localStorage.getItem("shoppingCredits"));
-      setmonthlyRepay(localStorage.getItem("repayPlanMonthly"));
+      setShoppingCredit(() => shoppingCredits);
+      setmonthlyRepay(() => repayPlanMonthly);
     };
     calculator();
   }, [TotalCartValue, payTenure, shoppingCredit]);
@@ -58,13 +57,6 @@ const PreApprovedSteps = ({ TotalCartValue }) => {
       formIsValid = false;
       errors["amount"] = "*Kindly input your salary";
     }
-
-    // if (typeof data.amount !== "undefined") {
-    //   if (!data.amount.match(/^[0-9]{11}$/)) {
-    //     formIsValid = false;
-    //     errors["amount"] = "*Please enter valid input.";
-    //   }
-    // }
 
     if (!data.nextSalaryDate) {
       formIsValid = false;
@@ -231,13 +223,16 @@ const PreApprovedSteps = ({ TotalCartValue }) => {
           </div>
         )}
         {nextStep === 2 && (
-          <PaymentPlan
-            downPayment={downPayment}
-            setPayTenure={setPayTenure}
-            //  customisedPlanCalculato={customisedPlanCalculator}
-            monthlyRepay={monthlyRepay}
-            TotalCartValue="80500"
-          />
+          <Suspense fallback={<p>Loading...</p>}>
+            <PaymentPlan
+              downPayments={downPayment}
+              setPayTenure={setPayTenure}
+              shoppingCredits={shoppingCredit}
+              //  customisedPlanCalculato={customisedPlanCalculator}
+              repayPlanMonthlys={monthlyRepay}
+              TotalCartValue="80500"
+            />
+          </Suspense>
         )}
         <div className={styles.nextAction_btn}>
           <CustomButton onClick={nextActionPage}>Continue</CustomButton>
